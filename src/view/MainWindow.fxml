@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="346.0" prefWidth="984.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
+   <top>
+      <HBox prefHeight="57.0" prefWidth="672.0" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onMouseClicked="#connect" text="Connect">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Malgun Gothic Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#loadData" prefHeight="25.0" prefWidth="89.0" text="Load data">
+               <font>
+                  <Font name="Malgun Gothic Bold" size="12.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onMouseClicked="#calcPath" prefHeight="29.0" prefWidth="113.0" text="Calculate path">
+               <font>
+                  <Font name="Malgun Gothic Bold" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="15.0" />
+               </HBox.margin></Button>
+            <Button mnemonicParsing="false" onMouseClicked="#loadCode" text="Load code">
+               <HBox.margin>
+                  <Insets left="200.0" />
+               </HBox.margin></Button>
+            <RadioButton fx:id="autopilotB" mnemonicParsing="false" onAction="#interpret" text="Autopilot">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tg" />
+               </toggleGroup>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Comic Sans MS Bold Italic" size="16.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="manualB" mnemonicParsing="false" text="Manual" toggleGroup="$tg">
+               <HBox.margin>
+                  <Insets left="130.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Comic Sans MS Bold Italic" size="16.0" />
+               </font></RadioButton>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </HBox>
+   </top>
+   <left>
+      <Pane prefHeight="289.0" prefWidth="434.0">
+         <children>
+            <Canvas fx:id="mapCanvas" height="288.0" width="433.0" />
+            <Canvas fx:id="pathCanvas" height="288.0" onMouseClicked="#drawX" width="433.0" />
+            <ImageView fx:id="airplanePic" blendMode="DARKEN" fitHeight="15.0" fitWidth="17.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+            <ImageView blendMode="DARKEN" fitHeight="16.0" fitWidth="13.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" visible="false" fx:id="xPic" />
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <TextArea fx:id="autoPcode" prefHeight="289.0" prefWidth="226.0" BorderPane.alignment="CENTER" />
+   </center>
+   <right>
+      <Pane prefHeight="289.0" prefWidth="231.0" BorderPane.alignment="CENTER">
+         <children>
+            <Circle fill="#555c61" layoutX="138.0" layoutY="117.0" radius="84.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="bigCircle" fill="#e8f2ff" layoutX="138.0" layoutY="117.0" opacity="0.51" radius="57.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="smallCircle" layoutX="138.0" layoutY="117.0" onMouseDragged="#joystcikMovement" onMouseReleased="#joystickRelease" radius="26.0" stroke="#01010a" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="BLACK" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill></Circle>
+            <Slider fx:id="rudderSlider" blockIncrement="0.001" layoutX="68.0" layoutY="212.0" max="1.0" min="-1.0" onMouseDragged="#rudder" />
+            <Slider fx:id="throttleSlider" blockIncrement="0.001" layoutX="40.0" layoutY="61.0" max="1.0" onMouseDragged="#throttle" orientation="VERTICAL" />
+            <Text layoutX="118.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rudder" />
+            <Text layoutX="11.0" layoutY="136.0" rotate="-90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Throttle" />
+         </children>
+      </Pane>
+   </right>
+</BorderPane>
